@@ -22,6 +22,7 @@ public class ClassifierView extends VBox {
     private Label confidenceLabel;
     private Label detailsLabel;
     private OnnxInference inferenceEngine;
+    private VBox dropPlaceholder;
 
     public ClassifierView() {
         setAlignment(Pos.CENTER);
@@ -43,11 +44,11 @@ public class ClassifierView extends VBox {
         resultLabel.setWrapText(true);
 
         // Drag and drop placeholder
-        VBox dropPlaceholder = new VBox(10);
+        dropPlaceholder = new VBox(10);
         dropPlaceholder.setAlignment(Pos.CENTER);
         dropPlaceholder.setStyle("-fx-border-color: gray; -fx-border-width: 2; -fx-border-style: dashed; -fx-background-color: -color-bg-subtle; -fx-border-radius: 10; -fx-background-radius: 10;");
-        dropPlaceholder.setPrefSize(300, 300);
-        dropPlaceholder.setMaxSize(300, 300);
+        dropPlaceholder.setPrefSize(350, 350);
+        dropPlaceholder.setMaxSize(350, 350);
 
         Label dropIcon = new Label("📥");
         dropIcon.setStyle("-fx-font-size: 48px;");
@@ -163,8 +164,8 @@ public class ClassifierView extends VBox {
     }
 
     private void processImage(File selectedFile) {
-        // Bring image to front (hiding the placeholder effectively because it has a
-        // background)
+        dropPlaceholder.setVisible(false);
+        dropPlaceholder.setManaged(false);
         imageView.toFront();
         Image image = new Image(selectedFile.toURI().toString());
         imageView.setImage(image);
